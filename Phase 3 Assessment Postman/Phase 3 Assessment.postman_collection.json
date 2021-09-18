@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "fb37d3ab-25f5-4041-bde9-d46cfa7dbe6c",
+		"name": "Phase 3 Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Page 2 Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"this is page 2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.page).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"per_page value elements should be 6\", function(){\r",
+							"    pm.expect(jsonData.data.length).to.eql(6)\r",
+							"    console.log(jsonData.data.length)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Ids in the data array should be 7 to 12\", function(){\r",
+							"    for(var i=6;i<jsonData.data.length;i++)\r",
+							"    pm.expect(jsonData.data[i].id).to.eql(i+1)    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Log data to console\", function(){\r",
+							"    for(var i=0;i<jsonData.data.length;i++)\r",
+							"    console.log(jsonData.data[i])  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Id 7\", function(){ \r",
+							"    pm.expect(jsonData.data[0].id).to.eql(7)\r",
+							"    pm.expect(jsonData.data[0].first_name).to.eql(\"Michael\")\r",
+							"    pm.expect(jsonData.data[0].last_name).to.eql(\"Lawson\")\r",
+							"    pm.expect(jsonData.data[0].email).to.eql(\"michael.lawson@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Id 8\", function(){ \r",
+							"    pm.expect(jsonData.data[1].id).to.eql(8)\r",
+							"    pm.expect(jsonData.data[1].first_name).to.eql(\"Lindsay\")\r",
+							"    pm.expect(jsonData.data[1].last_name).to.eql(\"Ferguson\")\r",
+							"    pm.expect(jsonData.data[1].email).to.eql(\"lindsay.ferguson@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Id 9\", function(){ \r",
+							"    pm.expect(jsonData.data[2].id).to.eql(9)\r",
+							"    pm.expect(jsonData.data[2].first_name).to.eql(\"Tobias\")\r",
+							"    pm.expect(jsonData.data[2].last_name).to.eql(\"Funke\")\r",
+							"    pm.expect(jsonData.data[2].email).to.eql(\"tobias.funke@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Id 10\", function(){ \r",
+							"    pm.expect(jsonData.data[3].id).to.eql(10)\r",
+							"    pm.expect(jsonData.data[3].first_name).to.eql(\"Byron\")\r",
+							"    pm.expect(jsonData.data[3].last_name).to.eql(\"Fields\")\r",
+							"    pm.expect(jsonData.data[3].email).to.eql(\"byron.fields@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Id 11\", function(){ \r",
+							"    pm.expect(jsonData.data[4].id).to.eql(11)\r",
+							"    pm.expect(jsonData.data[4].first_name).to.eql(\"George\")\r",
+							"    pm.expect(jsonData.data[4].last_name).to.eql(\"Edwards\")\r",
+							"    pm.expect(jsonData.data[4].email).to.eql(\"george.edwards@reqres.in\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Id 12\", function(){ \r",
+							"    pm.expect(jsonData.data[5].id).to.eql(12)\r",
+							"    pm.expect(jsonData.data[5].first_name).to.eql(\"Rachel\")\r",
+							"    pm.expect(jsonData.data[5].last_name).to.eql(\"Howell\")\r",
+							"    pm.expect(jsonData.data[5].email).to.eql(\"rachel.howell@reqres.in\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check new user\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Ann\");\r",
+							"    pm.expect(jsonData.job).to.eql(\"Analyst\");\r",
+							" });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ann\",\r\n    \"job\": \"Analyst\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
